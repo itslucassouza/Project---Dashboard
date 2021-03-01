@@ -3,13 +3,14 @@ import React from 'react';
 import { Container, Tag } from './styles';
 
 interface IHistoryFinanceCardProps {
+
     tagColor: string;
     title: string;
     subtitle: string;
     amount: string;
 }
 
-const HistoryFinanceCard: React.FC<IHistoryFinanceCardProps> = ({
+const HistoryFinanceCard: React.FC<IHistoryFinanceCardProps> = ({ 
     tagColor, title, subtitle, amount
 }) => {
     return(
