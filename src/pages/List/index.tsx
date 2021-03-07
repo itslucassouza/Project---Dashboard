@@ -9,7 +9,7 @@ import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
 import formatCurrency from '../../utils/formatCurrency'
 import formatDate from '../../utils/formatDate';
-import ListOfMonths from '../../utils/ListOfMonths';
+import listOfMonths from '../../utils/months';
 
 
 import { Container, Content, Filters } from './styles';
@@ -37,6 +37,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     const [yearSelected, setYearSelected] = useState<string>(String(new Date().getFullYear()));
     const [selectedFrequency, setSelectedfrequency] = useState(['recorrente', 'eventual'])
 
+    console.log(data)
+
     const { type } = match.params;
 
     const title = useMemo(() => {
@@ -45,7 +47,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     ,[type])
 
     const lineColor = useMemo(() => {
-        return type === 'entry-balance' ? '#F7931B' : '#E44C4E'
+        return type === 'entry-balance' ? '#4E41F0' : '#E44C4E'
     }, [type])
 
     
@@ -53,13 +55,16 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         () => {
         return type === 'entry-balance' ? gains : expenses; 
     }, [type])
+
     
     const months = useMemo(() => {
-        return ListOfMonths.map((month, index) => {
+        return listOfMonths.map((month, index) => {
             return {
                 value: index + 1,
                 label: month,
             }
+
+            console.log(listOfMonths)
         })
     }, [])
 
@@ -84,8 +89,6 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         }); 
     }, [listData])
 
-
-
     const handleFrequencyClick = (frequency: string) => {
         const alreadySelected = selectedFrequency.findIndex(item => item === frequency);
 
@@ -96,6 +99,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             setSelectedfrequency((prev) => [...prev, frequency])
         }
     }
+    
     useEffect(() => {
         const filteredData = listData.filter(item => {
             const date = new Date(item.date);
@@ -103,6 +107,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             const year = String(date.getFullYear());
             
             return month === monthSelected && year === yearSelected && selectedFrequency.includes(item.frequency);
+
         });
 
         const formattedDate = filteredData.map(item => {
@@ -115,6 +120,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                 tagColor: item.frequency === 'recorrente' ? '#4E41F0' : '#E44C4E',
             }  
         });
+
 
         setData(formattedDate);
 
