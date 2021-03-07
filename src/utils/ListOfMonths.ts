@@ -1,4 +1,4 @@
-export default [
+const ListOfMonths = [
     'janeiro',
     'fevereiro',
     'março',
@@ -10,6 +10,7 @@ export default [
     'Setembro',
     'Outubro',
     'Novembro',
-    'Dzembro',
+    'Dezembro',
+];
 
-]
+export default ListOfMonths;

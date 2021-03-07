@@ -12,7 +12,8 @@ const Dashboard: React.FC = () => {
     const options = [
         { value: 'Lucas', label: 'Lucas'},    
         { value: 'Lucas', label: 'Lucas'},    
-        { value: 'Lucas', label: 'Lucas'},    
+        { value: 'Lucas', label: 'Lucas'},
+        
      ]
 
     return(
